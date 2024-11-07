@@ -1,0 +1,2 @@
+export const supabaseUrl = "https://algdopuzhzapzxnggnvl.supabase.co";
+export const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsZ2RvcHV6aHphcHp4bmdnbnZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMjM0NDEsImV4cCI6MjA0NTY5OTQ0MX0.__76UnlP3MWfQw0scsiMtvIds14rkx0-O6sUt-eE__M";
