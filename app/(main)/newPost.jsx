@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../../components/ScreenWrapper'
 import Header from '../../components/Header'
@@ -14,6 +14,8 @@ import Button from '../../components/Button'
 import * as imagePicker from 'expo-image-picker'
 import { Image } from 'react-native'
 import { getSupabaseFileUrl } from '../../services/imageService'
+import { Video } from 'expo-av';
+import { createOrUpdatePost } from '../../services/postService'
 
 
 
@@ -56,14 +58,14 @@ const NewPost = () => {
     
     return false;
   }
-  const getFileType = async ()=>{
+  const getFileType = file =>{
     if(!file) return null;
     if(isLocalFile(file)){
       return file.type;
     }
 
     // Check img //video for remote file
-    if(file.includes('postImage')){
+    if(file.includes('postImages')){
       return 'image';
     }
     
@@ -79,9 +81,24 @@ const NewPost = () => {
   }
 
   const onSubmit = async ()=>{
+    if(!bodyRef.current && !file){
+      Alert.alert('Post', "please choose an image or add a post body");
+    }
 
+    let data ={
+      file,
+      body: bodyRef.current,
+      userId: user?.id,
+    }
+
+    //create post
+    setLoading(true);
+    let res = await createOrUpdatePost(data);
+    setLoading(false);
+    console.log('post res: ', res);
   }
 
+  console.log('file uri: ', getFileUri(file));
   return (
     <ScreenWrapper bg="white">
       <View style={styles.container} >
@@ -115,7 +132,15 @@ const NewPost = () => {
               <View style={styles.file}>
                 {
                   getFileType(file) == 'video'? (
-                    <></>
+                    <Video
+                        style={{flex: 1}}
+                        source={{
+                          uri: getFileUri(file)
+                        }}
+                        useNativeControls
+                        resizeMode='cover'
+                        isLooping
+                    />
                   ):(
                     <Image source={{uri: getFileUri(file)}} resizeMode='cover' style={{flex: 1}} />
                   )
