@@ -14,7 +14,7 @@ import Button from '../../components/Button'
 import * as imagePicker from 'expo-image-picker'
 import { Image } from 'react-native'
 import { getSupabaseFileUrl } from '../../services/imageService'
-import { Video } from 'expo-av';
+import { Video } from 'expo-av'
 import { createOrUpdatePost } from '../../services/postService'
 
 

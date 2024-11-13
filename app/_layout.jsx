@@ -5,7 +5,11 @@ import { AuthProvider, useAtuh } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import { getUserData } from '../services/userService'
 
-LogBox.ignoreLogs(['Warning: TNodeChildrenRenderer:', 'Warning: MemoizedTNodeRenderer:', 'Warning: TRenderEngineProvider:'])
+LogBox.ignoreLogs([
+    'Warning: TNodeChildrenRenderer:',
+    'Warning: MemoizedTNodeRenderer:',
+    'Warning: TRenderEngineProvider:'
+]);
 const _layout = () =>{
     return (
         <AuthProvider>

@@ -54,7 +54,7 @@ const PostCard = ({
         if (item && Array.isArray(item.postLikes)) {
             setLikes(item.postLikes);
         } else {
-            setLikes([]);  // Garantiza que siempre haya un array
+            setLikes([]);
         }
     }, [item]);
     
@@ -154,7 +154,7 @@ const PostCard = ({
         
         {/* Post video */}
         {
-            item?.file && item?.file?.includes('postVides') && (
+            item?.file && item?.file?.includes('postVideos') && (
                 <Video
                     style={[styles.postMedia, {height: hp(30)}]}
                     source={getSupabaseFileUrl(item?.file)}
