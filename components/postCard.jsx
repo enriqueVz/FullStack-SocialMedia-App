@@ -47,12 +47,17 @@ const PostCard = ({
         elevation: 1
     }
 
-    const [likes, setLikes] = useState([]);
+    const [likes, setLikes] = useState(item?.postLikes || []);
     const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
-        setLikes(item?.postLikes);
-    },[])
+    useEffect(() => {
+        if (item && Array.isArray(item.postLikes)) {
+            setLikes(item.postLikes);
+        } else {
+            setLikes([]);  // Garantiza que siempre haya un array
+        }
+    }, [item]);
+    
 
     const openPostDetails = ()=>{
         router.push({pathname: 'postDetails', params: {postId: item?.id}})
